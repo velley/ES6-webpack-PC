@@ -1,0 +1,11 @@
+{
+    "presets": [
+        ["env",{           
+            "targets":{
+                "browsers":["ie>=8"]
+            },
+            "useBuiltIns":true,
+            "debug":true
+        }]
+    ]
+}

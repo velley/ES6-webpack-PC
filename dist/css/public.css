@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+html {
+  font-size: 62.5%;
+  font-family: '\5B8B\4F53';
+  color: #333;
+  text-align: justify;
+  word-break: break-all;
+  -webkit-font-smoothing: antialiased;
+  background: #eee;
+}
+li {
+  list-style: none;
+}
+button {
+  cursor: pointer;
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+a {
+  clolr: #666;
+  text-decoration: none;
+}
+a:link,
+a:visited {
+  color: #555;
+}
+.pointer {
+  cursor: pointer;
+}
+
