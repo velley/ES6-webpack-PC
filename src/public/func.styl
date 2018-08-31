@@ -12,3 +12,19 @@ box-shadow()
   vendor('box-shadow',arguments)
 transition()
   vendor('transition',arguments)
+
+
+position(prop,args)
+  position prop
+  if args[0]
+    {args[0]} args[1]
+  if args[2]
+    {args[2]} args[3]
+
+relative()
+  position(relative,arguments)
+absolute()
+  position(absolute,arguments)
+fixed()
+  position(fixed,arguments)
+  

@@ -1,0 +1,23 @@
+@import './func.styl'
+.web_nav
+    width 100%
+    min-width 960px
+    height 40px
+    @background @blue
+    padding 0 30px
+    fixed(top 0px)
+    ul
+        height 100%
+        &.nav-user
+            float left
+        &.nav-menu
+            float right
+        li            
+            display inline-block
+            height 14px
+            line-height 14px
+            margin 13px 0
+            padding 0 10px
+            &:not(:last-child)
+                border-right 1px solid #333
+                

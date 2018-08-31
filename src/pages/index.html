@@ -5,9 +5,11 @@
     <title><%= htmlWebpackPlugin.options.title%>-好医网</title>
 </head>
 <body>
+    <%= require('html-loader!./template/nav.html') %>
     <div class="hello">
         你好啊
     </div>
-    <button>按钮</button>
+    <button class="ui primary button">按钮</button>
+    <%= require('html-loader!./template/footer.html') %>
 </body>
 </html>
