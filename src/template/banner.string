@@ -1,3 +1,5 @@
 <div>
-    <p>我的名字叫{{name}}</p>
+    <p id="list">我的名字叫{{person.name}}</p>
+    <p>我的年龄是{{person.age}}</p>
+    <p>我的本领是{{person.skill}}</p>
 </div>

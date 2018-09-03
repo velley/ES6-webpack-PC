@@ -1,23 +1,26 @@
 import renderHTML from '../utils/render.js'
 
+// 新建一个Page原型，用于处理与html页面相关的通用逻辑（如dom数据渲染、事件绑定）
 export default class Page {
-    init() {
+    _init() {
         this._checkError()
         this.onload()
     }
     constructor(param) {
         const instance = this
-        // 将属性/方法以及相应的模板和元素节点挂载至实例
+        // 将data属性/方法以及相应的模板和节点属性挂载至实例对象
         param.data          && (instance.$data = param.data)
         param.methods       && (instance.$methods = param.methods)
         param.element       && (instance.$element = param.element)
         param.template      && (instance.$template = param.template) 
         // 挂载钩子函数（执行完相关逻辑代码后自动调用）
-        param.afterRender   && (instance.afterRender = param.afterRender)
-        param.updateRender  && (instance.afterRender = param.updateRender)
-        //新定义一个htmlData属性，专门存放用于渲染html模板的数据
+        param.firstRender   && (instance.firstRender = param.firstRender)
+        param.updateRender  && (instance.updateRender = param.updateRender)
+        // 挂载用于双向绑定的属性（渲染模板数量=1时此属性才会生效，否则报错）
+        param.bindViews     && (instance.bindViews = param.bindViews)
+        //新定义一个htmlData属性，存放用于渲染html模板的数据
         instance.$htmlData = [] 
-        // onload事件，用于主页面加载完成时自动触发渲染函数以及其他自定义方法（原则上无需使用此方法）
+        // onload事件，用于主页面加载完成时自动触发自定义方法（原则上无需使用此方法）
         instance.onload = function() {
             window.onload = ()=>{
                 param.onload && param.onload.call(instance) //页面加载完成后执行自定义的方法                
@@ -33,7 +36,8 @@ export default class Page {
                     }
                 },
                 set:function(val) {
-                    this.$data[key] = val                    
+                    this.$data[key] = val   
+                    console.log('改变了')                 
                 }
             })
         }
@@ -49,13 +53,13 @@ export default class Page {
                     throw 'Page实例的method方法不可重复定义'
                 }
             })
-        }
-        // 上述步骤完成后，调用钩子函数created,可以在此函数内访问实例的属性与方法
+        }        
+        // 实例初始化,执行错误检查等逻辑操作
+        instance._init()
+        // 上述步骤完成后，自动调用钩子函数created,可以在此函数内访问实例的属性与方法
         param.created   && (instance.created = param.created.apply(instance))
-        // 实例初始化，页面加载完成后可以自动执行相应方法
-        instance.init()
     }
-    // 该函数需要手动调用，用于将渲染数据传送给对应的html模板
+    // 该函数需要手动调用，用于将数据传给对应的html模板进行渲染
     send(data,index=0) {
         if(!this.$template || !this.$element){
             throw '数据渲染需要定义template与element属性'
@@ -70,7 +74,7 @@ export default class Page {
         }
         this._render(this.$htmlData[index],index)
     }
-    // 页面数据渲染，该函数在send方法完成时自动调用
+    // 页面数据渲染，该函数在send方法内自动调用
     _render(data,key=0) {
         const temp = this.$template
         const el = this.$element            
@@ -82,11 +86,11 @@ export default class Page {
             document.querySelector(el).innerHTML = renderHTML(temp,data)
         } 
         // 渲染完成后，自动调用钩子函数afterRender或updateRender
-        if(this.firstRender){
+        if(this.hasRender){
             this.updateRender && this.updateRender()
         }else{
-            this.firstRender = true
-            this.afterRender && this.afterRender()
+            this.hasRender = true
+            this.firstRender && this.firstRender()
         }  
     }    
     _checkError() {
@@ -97,11 +101,15 @@ export default class Page {
                 throw 'dom节点数量和template模板数量必须一致'
             }
         }
-        for(item of this.$methods){
-            if(typeof item === 'function'){
+
+        for(key in this.$methods){
+            if(typeof this.$methods[key] === 'function'){
                 return
             }else{
                 throw 'methods内存在非法属性（请保证methods内定义的属性都是函数）'
+            }
+            if(key === 'send' || 'init'){
+                'methods方法命名冲突，send/init均为原型方法，请更改命名'
             }
         }
     }
