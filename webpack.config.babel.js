@@ -18,7 +18,7 @@ const htmlConfig = (name, title)=>{
 export default {
     entry:{
         public:["./src/public/index.js"],
-        index:'./src/pages/script/index.js'
+        index:'./src/script/index.js'
     },
     output:{
         path: path.resolve(__dirname,'./dist'),
@@ -98,8 +98,8 @@ export default {
             "@": __dirname + '/src',
             "utils": __dirname + '/src/utils',
             "api": __dirname + '/src/api',
-            "style": __dirname + '/src/pages/style',
-            "template": __dirname + '/src/pages/template',            
+            "style": __dirname + '/src/style',
+            "template": __dirname + '/src/template',            
         }
     },
     devServer: {
