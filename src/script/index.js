@@ -1,6 +1,18 @@
-import 'style/index.styl'
-import api from 'api/user.js'
+import 'style/index.styl' //加载相应Page的样式文件
+import temp from 'template/banner.string'
+import Page from 'utils/Page.js'
 
-
-
+const index = new Page({
+    element:'.box',
+    template:temp,
+    data: {
+        name : 'me'
+    },
+    created() {
+        console.log(this.$data.name)
+    },
+    onload() {
+        this.send({name:this.name})
+    }
+})
 
