@@ -1,6 +1,5 @@
 import 'style/index.styl' //加载相应Page的样式文件
 import temp from 'template/banner.string'
-import Page from 'utils/Page.js'
 
 const index = new Page({
     element:'.box',
