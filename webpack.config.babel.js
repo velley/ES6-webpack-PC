@@ -53,6 +53,10 @@ export default {
                 }
             },
             {
+                test: /\.string$/,
+                use: 'html-loader'
+            },         
+            {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
                 use:{
                     loader:'url-loader',
@@ -90,8 +94,8 @@ export default {
             filename: "css/[name].css",
             chunkFilename: "css/[name].[id].css"
         }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        // new webpack.NamedModulesPlugin(),
+        // new webpack.HotModuleReplacementPlugin()
     ],
     resolve:{
         alias:{
@@ -101,6 +105,9 @@ export default {
             "style": __dirname + '/src/style',
             "template": __dirname + '/src/template',            
         }
+    },
+    externals : {
+        'jquery' : 'window.jQuery'
     },
     devServer: {
         // contentBase: path.resolve(__dirname, './dist'),
