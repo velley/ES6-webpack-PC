@@ -1,3 +1,4 @@
+import './Page.js' //引入全局模块Page原型
 import './default.styl'                //引入stylus默认样式
 import 'semantic-ui/dist/semantic.css' //引入UI样式库
 import 'semantic-ui/dist/semantic.js'
