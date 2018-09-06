@@ -1,4 +1,4 @@
-import 'babel-polyfill' //由于axios基于Promise，所以需要加载babel-polyfill来兼容IE
+// import 'babel-polyfill' //由于axios基于Promise，所以需要加载babel-polyfill来兼容IE
 import axios from 'axios'
 // 创建实例
 const instance = axios.create({

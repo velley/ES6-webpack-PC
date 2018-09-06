@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .banner-container{
+        margin:30px auto;
+        width:500px;
+        height:300px;
+        /* border:1px solid red; */
+        position:relative;
+        overflow: hidden;
+    }    
+    .banner-item{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+    }    
+    .banner-item img{
+        width:100%
+    }
+    .tag-box{
+        position:absolute;
+        z-index: 100;
+        top:40px;
+        left:50%;
+        transform: translateX(-50%);
+        border:1px solid blue;
+    }
+    .tag{
+        display:inline-block;
+        border-radius:50%;
+        border:1px solid red;
+        width:20px;
+        height:20px;
+        margin:0 10px;
+        background:green;
+    }
+    .light{
+        background:#fff;
+    }
+    </style>
+</head>
+<body>
+    <section class="banner-container">
+        <div><img class="banner-item" src="https://goss.veer.com/creative/vcg/veer/1600water/veer-133148728.jpg" alt=""></div>
+        <div><img class="banner-item" src="https://goss.veer.com/creative/vcg/veer/1600water/veer-301048941.jpg" alt=""></div>
+        <div><img class="banner-item" src="https://goss.veer.com/creative/vcg/veer/1600water/veer-311863357.jpg" alt=""></div>        
+        <div><img class="banner-item" src="https://goss.veer.com/creative/vcg/veer/1600water/veer-311850427.jpg" alt=""></div>
+        <div class="tag-box">
+            <span class="tag"></span>
+            <span class="tag"></span>
+            <span class="tag"></span>
+            <span class="tag"></span>
+        </div>
+        <div class="button">
+            <div class="next"></div>
+            <div class="prev"></div>
+        </div>
+    </section>
+    <%= require('html-loader!../template/footer.html') %> 
+</body>
+</html>
