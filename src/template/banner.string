@@ -1,8 +1,0 @@
-<div>
-    <p id="demo">我的名字叫{{person.name}}</p>
-    <p class="newone">我的年龄是{{person.age}}</p>
-    <p>我的本领是{{person.skill}}</p>
-</div>
-<div>
-    <p>title:{{lik}}</p>
-</div>

@@ -14,15 +14,18 @@
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
-    "babel-polyfill": "^6.26.0",
+    "babel-plugin-proxy": "^1.1.0",
+    "babel-polyfill": "^6.0.16",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
+    "handlebars": "^4.0.12",
+    "handlebars-loader": "^1.7.0",
+    "hogan": "^1.0.2",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "jsonp": "^0.2.1",
     "mini-css-extract-plugin": "^0.4.1",
-    "pug": "^2.0.3",
     "semantic-ui": "^2.3.3",
     "style-loader": "^0.22.1",
     "stylus": "^0.54.5",
@@ -31,5 +34,8 @@
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.5"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
   }
 }

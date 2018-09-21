@@ -42,10 +42,9 @@ export default class Page {
                 },
                 set:function(val) {                    
                     this.$data[key] = val                   
-                    if(this.bindViews.indexOf(key)>-1){                        
+                    if(this.bindViews && this.bindViews.indexOf(key)>-1){                        
                         const obj = {}
-                        obj[key] = val
-                        alert('改变')
+                        obj[key] = val                        
                         this.send(obj)                        
                     }
                 }
@@ -78,7 +77,7 @@ export default class Page {
             throw 'send方法的第一个参数必须是Object类型'
         }        
         if(this.$htmlData[index]){
-            this.$htmlData[index] = $.extend({},this.$htmlData[index],data)              
+            this.$htmlData[index] = $.extend({},this.$htmlData[index],data)      
         }else{
             this.$htmlData[index] = data
         }        
@@ -114,8 +113,7 @@ export default class Page {
                 throw 'bindView数组的元素必须是data内部的属性'            
             } 
             if(typeof self[item] === 'object' && self[item]){                            
-                if(window.Proxy){
-                    console.log('prox存在')
+                if(window.Proxy){                    
                     self[item] = new Proxy(self[item],{
                         set:function(target,key,value) { 
                             target[key] = value                        
@@ -126,6 +124,7 @@ export default class Page {
                         }
                     })
                 }else{
+                    console.log('该浏览器不支持Proxy')
                     self.supportNewApi = false
                 }
             }

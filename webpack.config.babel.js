@@ -6,10 +6,10 @@ import MiniCss from 'mini-css-extract-plugin'
 const WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev'
 const htmlConfig = (name, title)=>{
     return {
-        template    : `./src/pages/${name}.html`,
+        template    : `./src/pages/${name}.hbs`,
         filename    : `view/${name}.html`,
         title       : title,
-        inject      : true,
+        inject      : 'head',
         hash        : true,
         chunks      : ['public','common','vendor',name]
     }
@@ -18,7 +18,8 @@ const htmlConfig = (name, title)=>{
 export default {
     entry:{
         public:["./src/public/index.js"],
-        index:'./src/script/index.js'
+        index:'./src/script/index.js',
+        banner:'./src/script/banner.js'
     },
     output:{
         path: path.resolve(__dirname,'./dist'),
@@ -53,8 +54,8 @@ export default {
                 }
             },
             {
-                test: /\.string$/,
-                use: 'html-loader'
+                test: /\.hbs$/,
+                use: ['handlebars-loader']
             },         
             {
                 test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
@@ -89,7 +90,8 @@ export default {
         }
     },
     plugins:[
-        new HWP(htmlConfig('index','首页')),        
+        new HWP(htmlConfig('index','首页')), 
+        // new HWP(htmlConfig('banner','轮播图')),         
         new MiniCss({
             filename: "css/[name].css",
             chunkFilename: "css/[name].[id].css"
